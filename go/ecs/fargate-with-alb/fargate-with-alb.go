@@ -39,10 +39,12 @@ func NewFargateWithALBStack(scope constructs.Construct, id string, props *Fargat
 		Image: ecs.ContainerImage_FromRegistry(jsii.String("amazon/amazon-ecs-sample"), &ecs.RepositoryImageProps{}),
 	})
 
+  /*
 	container.AddPortMappings(&ecs.PortMapping{
 		ContainerPort: jsii.Number(80),
 		Protocol:      ecs.Protocol_TCP,
 	})
+  */
 
 	// Create Fargate Service
 	service := ecs.NewFargateService(stack, jsii.String("FargoService"), &ecs.FargateServiceProps{
