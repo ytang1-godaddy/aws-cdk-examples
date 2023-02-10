@@ -24,7 +24,12 @@ exports.handler = async function (event, context) {
         return await submitResponse('SUCCESS');
     } catch (e) {
         logError(e);
-        const temp = JSON.stringify(context.logStreamName)
+        const temp = JSON.stringify(context.logStreamName);
+        temp.replace(/&/g, "&amp;")
+         .replace(/</g, "&lt;")
+         .replace(/>/g, "&gt;")
+         .replace(/"/g, "&quot;")
+         .replace(/'/g, "&#039;");
         return await submitResponse('FAILED', e.message + `\nMore information in CloudWatch Log Stream: ${temp}`);
     }
     function mergeConfigurations(request, inputConfig, currentConfig) {
