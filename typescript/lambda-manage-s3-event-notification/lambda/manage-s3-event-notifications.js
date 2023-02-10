@@ -24,7 +24,8 @@ exports.handler = async function (event, context) {
         return await submitResponse('SUCCESS');
     } catch (e) {
         logError(e);
-        return await submitResponse('FAILED', e.message + `\nMore information in CloudWatch Log Stream: ${context.logStreamName}`);
+        const temp = JSON.stringify(context.logStreamName)
+        return await submitResponse('FAILED', e.message + `\nMore information in CloudWatch Log Stream: ${temp}`);
     }
     function mergeConfigurations(request, inputConfig, currentConfig) {
         const mergedConfig = {}
